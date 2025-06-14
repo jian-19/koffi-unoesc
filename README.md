@@ -20,4 +20,4 @@ Após instalar os requisitos e aceitar os termos do Android, basta abrir a pasta
 
 ## Informações adicionais
 
-Caso queira saber, o repositório do nosso teste de API é [mock-coffee](https://github.com/mini-niko/koffi-unoesc). Uma API simples apenas para a POC.
+Caso queira saber, o repositório do nosso teste de API é [mock-coffee](https://github.com/jian-19/koffi-unoesc). Uma API simples apenas para a POC.
