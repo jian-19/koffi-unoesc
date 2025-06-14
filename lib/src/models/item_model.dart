@@ -1,21 +1,29 @@
 class ItemModel {
   late String name;
+  late String content;
   late double price;
   late String image;
 
-  ItemModel({required this.name, required this.price, required this.image});
+  ItemModel({
+    required this.name,
+    required this.content,
+    required this.price,
+    required this.image,
+  });
 
   ItemModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    price = json['price'];
-    image = json['image'];
+    name = json['title'] ?? '';
+    content = json['content'] ?? '';
+    price = (json['amount'] as num).toDouble();
+    image = 'https://gru.ifsp.edu.br/images/phocagallery/galeria2/image03_grd.png';
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['price'] = this.price;
-    data['image'] = this.image;
-    return data;
+    return {
+      'title': name,
+      'content': content,
+      'amount': price,
+      'image': image,
+    };
   }
 }

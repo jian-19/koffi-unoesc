@@ -3,7 +3,7 @@ import 'package:koffi_unoesc/src/models/item_model.dart';
 import 'package:koffi_unoesc/src/repositories/item_repository.dart';
 
 class HotCoffeeController {
-  final String type = "hot_coffee";
+  final String type = "hot_drinks";
 
   final state = ValueNotifier<ItemState>(ItemState.start);
 
@@ -17,7 +17,8 @@ class HotCoffeeController {
     try {
       items = await _repository.fetchType(type);
       state.value = ItemState.success;
-    } catch (_) {
+    } catch (err) {
+      print(err);
       state.value = ItemState.error;
     }
   }

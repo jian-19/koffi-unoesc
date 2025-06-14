@@ -3,7 +3,7 @@ import 'package:koffi_unoesc/src/models/item_model.dart';
 
 class ItemRepository {
   final _dio = Dio();
-  final _url = "https://localhost:3000/api/mock";
+  final _url = "http://10.0.2.2:3000/api/mock";
 
   Future fetchType(String type) async {
     final response = await _dio.get("$_url/$type");
