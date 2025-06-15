@@ -62,6 +62,48 @@ class ProductsScreen extends StatelessWidget {
               ),
             ),
           ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacementNamed(context, "/products/cold_coffees");
+            },
+            child: Card(
+              color: colors["secondary"],
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Cafés quentes",
+                      style: theme.primaryTextTheme.bodyLarge,
+                    ),
+                    const Icon(Icons.arrow_forward)
+                  ],
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacementNamed(context, "/products/snacks");
+            },
+            child: Card(
+              color: colors["secondary"],
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Lanches",
+                      style: theme.primaryTextTheme.bodyLarge,
+                    ),
+                    const Icon(Icons.arrow_forward)
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

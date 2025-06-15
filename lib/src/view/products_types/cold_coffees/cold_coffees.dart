@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:koffi_unoesc/src/controllers/cart_controller.dart';
-import 'package:koffi_unoesc/src/controllers/items_controllers/hot_coffee_controller.dart';
+import 'package:koffi_unoesc/src/controllers/items_controllers/cold_coffee_controller.dart';
 import 'package:koffi_unoesc/src/models/item_model.dart';
 import 'package:koffi_unoesc/src/ui/components/custom_app_bar_title.dart';
 import 'package:koffi_unoesc/src/ui/components/custom_button.dart';
 import 'package:koffi_unoesc/src/ui/components/custom_drawer.dart';
 import 'package:koffi_unoesc/src/ui/theme/colors.dart';
 
-class HotCoffeesScreen extends StatefulWidget {
-  const HotCoffeesScreen({super.key});
+class ColdCoffeesScreen extends StatefulWidget {
+  const ColdCoffeesScreen({super.key});
 
   @override
-  State<HotCoffeesScreen> createState() => _HotCoffeesScreenState();
+  State<ColdCoffeesScreen> createState() => _ColdCoffeesScreenState();
 }
 
-class _HotCoffeesScreenState extends State<HotCoffeesScreen> {
-  final controller = HotCoffeeController();
+class _ColdCoffeesScreenState extends State<ColdCoffeesScreen> {
+  final controller = ColdCoffeeController();
 
   final cartController = CartController.instance;
   double price = 0.0;
@@ -60,26 +60,26 @@ class _HotCoffeesScreenState extends State<HotCoffeesScreen> {
                       width: 16,
                     ),
                     GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        cartController.add(item);
-                        price = cartController.totalPrice();
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: colors["secondary"],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Icon(
-                          Icons.add,
-                          color: colors["white"],
+                      onTap: () {
+                        setState(() {
+                          cartController.add(item);
+                          price = cartController.totalPrice();
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: colors["secondary"],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Icon(
+                            Icons.add,
+                            color: colors["white"],
+                          ),
                         ),
                       ),
                     ),
-                  ),
                   ],
                 ),
               ],
@@ -152,7 +152,7 @@ class _HotCoffeesScreenState extends State<HotCoffeesScreen> {
     return Scaffold(
       drawer: const CustomDrawer(),
       appBar: AppBar(
-        title: const CustomAppBarTitle(title: "Cafés Quentes"),
+        title: const CustomAppBarTitle(title: "Cafés Gelados"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),

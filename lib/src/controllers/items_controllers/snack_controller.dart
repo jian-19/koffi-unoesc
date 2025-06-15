@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:koffi_unoesc/src/models/item_model.dart';
 import 'package:koffi_unoesc/src/repositories/item_repository.dart';
 
-class HotCoffeeController {
-  final String type = "hot_drinks";
+class SnackController {
+  final String type = "snacks";
 
   final state = ValueNotifier<ItemState>(ItemState.start);
 

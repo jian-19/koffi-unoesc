@@ -3,7 +3,7 @@ import 'package:koffi_unoesc/src/models/item_model.dart';
 class CartController {
   static CartController instance = CartController();
 
-  List<ItemModel> _listItems = [];
+  final List<ItemModel> _listItems = [];
 
   void add(ItemModel item) {
     _listItems.add(item);
@@ -23,7 +23,9 @@ class CartController {
 
   double totalPrice() {
     var price = 0.0;
-    _listItems.forEach((e) => price += e.price);
+    for (var e in _listItems) {
+      price += e.price;
+    }
     var finalPrice = double.parse(price.toStringAsFixed(2));
     return finalPrice;
   }

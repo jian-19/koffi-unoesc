@@ -6,6 +6,8 @@ import 'package:koffi_unoesc/src/view/initial.dart';
 import 'package:koffi_unoesc/src/view/login.dart';
 import 'package:koffi_unoesc/src/view/products.dart';
 import 'package:koffi_unoesc/src/view/products_types/hot_coffees/hot_coffees.dart';
+import 'package:koffi_unoesc/src/view/products_types/cold_coffees/cold_coffees.dart';
+import 'package:koffi_unoesc/src/view/products_types/snacks/snacks.dart';
 import 'package:koffi_unoesc/src/view/register.dart';
 
 class AppWidget extends StatelessWidget {
@@ -26,6 +28,8 @@ class AppWidget extends StatelessWidget {
             "/register": (context) => const RegisterScreen(),
             "/products": (context) => const ProductsScreen(),
             "/products/hot_coffees": (context) => const HotCoffeesScreen(),
+            "/products/cold_coffees": (context) => const ColdCoffeesScreen(),
+            "/products/snacks": (context) => const SnacksScreen(),
             "/cart": (context) => const CartScreen(),
           },
         );

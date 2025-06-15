@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:koffi_unoesc/src/controllers/cart_controller.dart';
-import 'package:koffi_unoesc/src/controllers/items_controllers/hot_coffee_controller.dart';
+import 'package:koffi_unoesc/src/controllers/items_controllers/snack_controller.dart';
 import 'package:koffi_unoesc/src/models/item_model.dart';
 import 'package:koffi_unoesc/src/ui/components/custom_app_bar_title.dart';
 import 'package:koffi_unoesc/src/ui/components/custom_button.dart';
 import 'package:koffi_unoesc/src/ui/components/custom_drawer.dart';
 import 'package:koffi_unoesc/src/ui/theme/colors.dart';
 
-class HotCoffeesScreen extends StatefulWidget {
-  const HotCoffeesScreen({super.key});
+class SnacksScreen extends StatefulWidget {
+  const SnacksScreen({super.key});
 
   @override
-  State<HotCoffeesScreen> createState() => _HotCoffeesScreenState();
+  State<SnacksScreen> createState() => _SnacksScreenState();
 }
 
-class _HotCoffeesScreenState extends State<HotCoffeesScreen> {
-  final controller = HotCoffeeController();
+class _SnacksScreenState extends State<SnacksScreen> {
+  final controller = SnackController();
 
   final cartController = CartController.instance;
   double price = 0.0;
@@ -152,7 +152,7 @@ class _HotCoffeesScreenState extends State<HotCoffeesScreen> {
     return Scaffold(
       drawer: const CustomDrawer(),
       appBar: AppBar(
-        title: const CustomAppBarTitle(title: "Cafés Quentes"),
+        title: const CustomAppBarTitle(title: "Lanches"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),

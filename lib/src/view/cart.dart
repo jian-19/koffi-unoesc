@@ -67,16 +67,18 @@ class _CartScreenState extends State<CartScreen> {
                       child: Column(
                         children: cartController.getAll().map((item) {
                           return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 2),
+                            padding: const EdgeInsets.symmetric(vertical: 4),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  "${item.name}",
-                                  style: theme.primaryTextTheme.bodyMedium,
+                                Expanded(child: 
+                                  Text(
+                                    item.name,
+                                    style: theme.primaryTextTheme.bodyMedium,
+                                  ),
                                 ),
                                 Text(
-                                  "R\$${item.price}",
+                                  "R\$${item.price.toStringAsFixed(2)}",
                                   style: theme.primaryTextTheme.bodyMedium,
                                 ),
                               ],
@@ -95,7 +97,7 @@ class _CartScreenState extends State<CartScreen> {
                             style: theme.primaryTextTheme.bodyLarge,
                           ),
                           Text(
-                            "R\$${cartController.totalPrice()}",
+                            "R\$${cartController.totalPrice().toStringAsFixed(2)}",
                             style: theme.primaryTextTheme.bodyLarge,
                           ),
                         ],

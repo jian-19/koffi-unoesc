@@ -15,7 +15,7 @@ class ItemModel {
     name = json['title'] ?? '';
     content = json['content'] ?? '';
     price = (json['amount'] as num).toDouble();
-    image = 'https://gru.ifsp.edu.br/images/phocagallery/galeria2/image03_grd.png';
+    image = json['image'] ?? "https://placehold.co/75x75.png";
   }
 
   Map<String, dynamic> toJson() {
