@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:koffi_unoesc/src/controllers/cart_controller.dart';
 import 'package:koffi_unoesc/src/controllers/items_controllers/cold_coffee_controller.dart';
-import 'package:koffi_unoesc/src/models/item_model.dart';
+import 'package:koffi_unoesc/src/models/item_model.dart'; 
 import 'package:koffi_unoesc/src/ui/components/custom_app_bar_title.dart';
 import 'package:koffi_unoesc/src/ui/components/custom_button.dart';
 import 'package:koffi_unoesc/src/ui/components/custom_drawer.dart';
 import 'package:koffi_unoesc/src/ui/theme/colors.dart';
+
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+
+const String _kBaseUrl = 'http://localhost:3000'; 
 
 class ColdCoffeesScreen extends StatefulWidget {
   const ColdCoffeesScreen({super.key});
@@ -15,16 +22,22 @@ class ColdCoffeesScreen extends StatefulWidget {
 }
 
 class _ColdCoffeesScreenState extends State<ColdCoffeesScreen> {
-  final controller = ColdCoffeeController();
-
+  final controller = ColdCoffeeController(); 
   final cartController = CartController.instance;
   double price = 0.0;
 
-  _success(context) {
+
+  Widget _success(BuildContext context) {
     return ListView.builder(
       itemCount: controller.items.length,
       itemBuilder: (_, index) {
         var item = controller.items[index];
+        
+
+        final imageUrl = item.image.isNotEmpty
+            ? '$_kBaseUrl${item.image}' 
+            : 'https://placehold.co/75x75'; 
+
         return Card(
           color: colors["secondary_light"],
           child: Padding(
@@ -33,7 +46,16 @@ class _ColdCoffeesScreenState extends State<ColdCoffeesScreen> {
               children: [
                 Row(
                   children: [
-                    Image.network(item.image, height: 75, width: 75,),
+
+                    Image.network(
+                      imageUrl,
+                      height: 75,
+                      width: 75,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(Icons.broken_image, size: 75); // Ícone de erro
+                      },
+                    ),
                     const SizedBox(
                       width: 16,
                     ),
@@ -50,7 +72,7 @@ class _ColdCoffeesScreenState extends State<ColdCoffeesScreen> {
                             height: 8,
                           ),
                           Text(
-                            "R\$${item.price.toStringAsFixed(2)}",
+                            "R\$${item.price.toStringAsFixed(2).replaceFirst('.', ',')}",
                             style: Theme.of(context).primaryTextTheme.bodyMedium,
                           ),
                         ],
@@ -90,7 +112,7 @@ class _ColdCoffeesScreenState extends State<ColdCoffeesScreen> {
     );
   }
 
-  _loading(context) {
+  Widget _loading(BuildContext context) {
     return Center(
       child: CircularProgressIndicator(
         color: colors["secondary"],
@@ -98,7 +120,7 @@ class _ColdCoffeesScreenState extends State<ColdCoffeesScreen> {
     );
   }
 
-  _error(context) {
+  Widget _error(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -111,7 +133,7 @@ class _ColdCoffeesScreenState extends State<ColdCoffeesScreen> {
             height: 16,
           ),
           ElevatedButton(
-            onPressed: () => controller.start(),
+            onPressed: () => controller.start(), 
             style: const ButtonStyle(
               padding: WidgetStatePropertyAll(EdgeInsets.all(15)),
             ),
@@ -125,7 +147,7 @@ class _ColdCoffeesScreenState extends State<ColdCoffeesScreen> {
     );
   }
 
-  stateManagement(context, state) {
+  Widget stateManagement(BuildContext context, ItemState state) {
     switch (state) {
       case ItemState.start:
         return Container();
@@ -142,7 +164,7 @@ class _ColdCoffeesScreenState extends State<ColdCoffeesScreen> {
   void initState() {
     super.initState();
     price = cartController.totalPrice();
-    controller.start();
+    controller.start(); 
   }
 
   @override
@@ -152,7 +174,7 @@ class _ColdCoffeesScreenState extends State<ColdCoffeesScreen> {
     return Scaffold(
       drawer: const CustomDrawer(),
       appBar: AppBar(
-        title: const CustomAppBarTitle(title: "Cafés Gelados"),
+        title: const CustomAppBarTitle(title: "Bebidas Geladas"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),

@@ -41,9 +41,11 @@ class ProductsScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
+
           GestureDetector(
             onTap: () {
-              Navigator.pushReplacementNamed(context, "/products/hot_coffees");
+
+              Navigator.pushReplacementNamed(context, "/products/hot_drinks"); 
             },
             child: Card(
               color: colors["secondary"],
@@ -53,7 +55,7 @@ class ProductsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Cafés quentes",
+                      "Bebidas Quentes", 
                       style: theme.primaryTextTheme.bodyLarge,
                     ),
                     const Icon(Icons.arrow_forward)
@@ -62,9 +64,13 @@ class ProductsScreen extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 16), 
+
+
           GestureDetector(
             onTap: () {
-              Navigator.pushReplacementNamed(context, "/products/cold_coffees");
+              
+              Navigator.pushReplacementNamed(context, "/products/cold_drinks");
             },
             child: Card(
               color: colors["secondary"],
@@ -74,7 +80,7 @@ class ProductsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Cafés quentes",
+                      "Bebidas Geladas", 
                       style: theme.primaryTextTheme.bodyLarge,
                     ),
                     const Icon(Icons.arrow_forward)
@@ -83,8 +89,12 @@ class ProductsScreen extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 16), 
+
+          // LANCHES
           GestureDetector(
             onTap: () {
+              
               Navigator.pushReplacementNamed(context, "/products/snacks");
             },
             child: Card(
@@ -95,7 +105,7 @@ class ProductsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Lanches",
+                      "Lanches", 
                       style: theme.primaryTextTheme.bodyLarge,
                     ),
                     const Icon(Icons.arrow_forward)

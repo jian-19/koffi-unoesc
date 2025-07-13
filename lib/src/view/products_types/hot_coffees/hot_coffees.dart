@@ -14,73 +14,72 @@ class HotCoffeesScreen extends StatefulWidget {
   State<HotCoffeesScreen> createState() => _HotCoffeesScreenState();
 }
 
+const String _kBaseUrl = 'http://localhost:3000';
+
 class _HotCoffeesScreenState extends State<HotCoffeesScreen> {
   final controller = HotCoffeeController();
-
   final cartController = CartController.instance;
   double price = 0.0;
 
-  _success(context) {
+  Widget _success(BuildContext context) {
     return ListView.builder(
       itemCount: controller.items.length,
       itemBuilder: (_, index) {
         var item = controller.items[index];
+
+        final imageUrl = item.image.isNotEmpty
+            ? '$_kBaseUrl${item.image}'
+            : 'https://placehold.co/75x75';
+
         return Card(
           color: colors["secondary_light"],
           child: Padding(
             padding: const EdgeInsets.all(8),
-            child: Stack(
+            child: Row(
               children: [
-                Row(
-                  children: [
-                    Image.network(item.image, height: 75, width: 75,),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.name,
-                            style: Theme.of(context).primaryTextTheme.bodyLarge,
-                            softWrap: true,
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            "R\$${item.price.toStringAsFixed(2)}",
-                            style: Theme.of(context).primaryTextTheme.bodyMedium,
-                          ),
-                        ],
+                Image.network(
+                  imageUrl,
+                  height: 75,
+                  width: 75,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(Icons.broken_image, size: 75);
+                  },
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item.name,
+                        style: Theme.of(context).primaryTextTheme.bodyLarge,
+                        softWrap: true,
                       ),
-                    ),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        cartController.add(item);
-                        price = cartController.totalPrice();
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: colors["secondary"],
-                        borderRadius: BorderRadius.circular(8),
+                      const SizedBox(height: 8),
+                      Text(
+                        "R\$${item.price.toStringAsFixed(2).replaceFirst('.', ',')}",
+                        style: Theme.of(context).primaryTextTheme.bodyMedium,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Icon(
-                          Icons.add,
-                          color: colors["white"],
-                        ),
-                      ),
-                    ),
+                    ],
                   ),
-                  ],
+                ),
+                const SizedBox(width: 16),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      cartController.add(item);
+                      price = cartController.totalPrice();
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: colors["secondary"],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: Icon(Icons.add, color: colors["white"]),
+                  ),
                 ),
               ],
             ),
@@ -90,7 +89,7 @@ class _HotCoffeesScreenState extends State<HotCoffeesScreen> {
     );
   }
 
-  _loading(context) {
+  Widget _loading(BuildContext context) {
     return Center(
       child: CircularProgressIndicator(
         color: colors["secondary"],
@@ -98,7 +97,7 @@ class _HotCoffeesScreenState extends State<HotCoffeesScreen> {
     );
   }
 
-  _error(context) {
+  Widget _error(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -107,9 +106,7 @@ class _HotCoffeesScreenState extends State<HotCoffeesScreen> {
             "Uh oh! Algo deu errado =(",
             style: Theme.of(context).primaryTextTheme.bodyLarge,
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () => controller.start(),
             style: const ButtonStyle(
@@ -119,13 +116,13 @@ class _HotCoffeesScreenState extends State<HotCoffeesScreen> {
               "Tente Novamente",
               style: Theme.of(context).primaryTextTheme.bodyLarge,
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
-  stateManagement(context, state) {
+  Widget stateManagement(BuildContext context, ItemState state) {
     switch (state) {
       case ItemState.start:
         return Container();
@@ -152,49 +149,41 @@ class _HotCoffeesScreenState extends State<HotCoffeesScreen> {
     return Scaffold(
       drawer: const CustomDrawer(),
       appBar: AppBar(
-        title: const CustomAppBarTitle(title: "Cafés Quentes"),
+        title: const CustomAppBarTitle(title: "Bebidas Quentes"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: AnimatedBuilder(
-            animation: controller.state,
-            builder: (_, __) {
-              return stateManagement(context, controller.state.value);
-            }),
+          animation: controller.state,
+          builder: (_, __) {
+            return stateManagement(context, controller.state.value);
+          },
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         color: colors["primary_light"],
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.max,
           children: [
             Text(
-              "${cartController.length()} itens / R\$${price.toStringAsFixed(2)}",
+              "${cartController.length()} itens / R\$${price.toStringAsFixed(2).replaceFirst('.', ',')}",
               style: theme.primaryTextTheme.bodyLarge,
             ),
             ElevatedButton(
               style: const ButtonStyle(
-                  padding: WidgetStatePropertyAll(EdgeInsets.all(8))),
+                padding: WidgetStatePropertyAll(EdgeInsets.all(8)),
+              ),
               onPressed: () {
                 Navigator.pushReplacementNamed(context, "/cart");
               },
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.shopping_cart,
-                    color: colors["black"],
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    "Carrinho",
-                    style: theme.primaryTextTheme.bodyLarge,
-                  )
+                  Icon(Icons.shopping_cart, color: colors["black"]),
+                  const SizedBox(width: 8),
+                  Text("Carrinho", style: theme.primaryTextTheme.bodyLarge),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

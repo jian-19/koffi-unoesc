@@ -1,29 +1,42 @@
+
 class ItemModel {
-  late String name;
-  late String content;
-  late double price;
-  late String image;
+  final String id; 
+  final String name;
+  final String description; 
+  final double price;
+  final String image;
+  final int category_id;
 
   ItemModel({
+    required this.id, 
     required this.name,
-    required this.content,
+    required this.description,
     required this.price,
     required this.image,
+    required this.category_id,
   });
 
-  ItemModel.fromJson(Map<String, dynamic> json) {
-    name = json['title'] ?? '';
-    content = json['content'] ?? '';
-    price = (json['amount'] as num).toDouble();
-    image = json['image'] ?? "https://placehold.co/75x75.png";
+
+  factory ItemModel.fromJson(Map<String, dynamic> json) {
+    return ItemModel(
+      id: json['id']?.toString() ?? '', 
+      name: json['title']?.toString() ?? '', 
+      description: json['content']?.toString() ?? '', 
+      price: (json['amount'] as num?)?.toDouble() ?? 0.0, 
+      image: json['image']?.toString() ?? '', 
+      category_id: (json['category_id'] as int?) ?? 0, 
+    );
   }
+
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id, 
       'title': name,
-      'content': content,
+      'content': description,
       'amount': price,
       'image': image,
+      'category_id': category_id, 
     };
   }
 }
