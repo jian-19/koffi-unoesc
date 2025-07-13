@@ -1,23 +1,70 @@
-# Koffi Unoesc
 
-Um projeto feito para avaliação da Unoesc
+# ☕ Koffi Unoesc
 
-## O que é?
+Um aplicativo Flutter desenvolvido como prova de conceito (POC) para uma cafeteria com delivery de café.  
+O usuário pode navegar no cardápio e fazer pedidos pelo app.
 
-Se trata de uma demonstração de um projeto de um app para uma cafeteria com delivery de café, na qual o usuário pode solicitar seu café via aplicativo
+---
 
-## Pré-requisitos
+## 🚀 Como começar
 
-Para rodar o projeto Flutter você precisa ter instalado na sua máquina:
+Siga os passos abaixo para clonar, configurar e executar o app localmente.
+
+### 1. Clone o repositório
+
+```
+git clone https://github.com/jian-19/koffi-unoesc.git
+cd koffi-unoesc
+```
+
+### 2. Instale o Flutter e pré-requisitos
+
+Você precisa ter instalado em sua máquina:
 
 - [Git](https://git-scm.com/downloads)
-- [Android Studio](https://developer.android.com/studio?hl=pt-br) (**IMPORTANTE:** precisa baixar o Android Studio cmdline-tools via IDE)
-- [Flutter](https://docs.flutter.dev/get-started/install?_gl=1*d0vle6*_gcl_aw*R0NMLjE3Mjc4NTkxNzUuQ2owS0NRanczdk8zQmhDcUFSSXNBRVdibGNCa0NjZUlFMU01LWlyZTNuYmFOZHZDMUQzYm5XdVdXY1lHaWJDZnZ1bHJYdnhqN282YndrOGFBdjVrRUFMd193Y0I.*_gcl_dc*R0NMLjE3Mjc4NTkxNzUuQ2owS0NRanczdk8zQmhDcUFSSXNBRVdibGNCa0NjZUlFMU01LWlyZTNuYmFOZHZDMUQzYm5XdVdXY1lHaWJDZnZ1bHJYdnhqN282YndrOGFBdjVrRUFMd193Y0I.*_ga*MTIyNjI3Njc4LjE3MjU2Mzg2NzE.*_ga_04YGWK0175*MTcyODI0MTA0NC4xNS4wLjE3MjgyNDEwNDQuMC4wLjA.) (Recomendo baixar o Visual Studio Code para baixar o Flutter de forma mais rápida)
+- [Android Studio](https://developer.android.com/studio?hl=pt-br)  
+  **IMPORTANTE:** instale o pacote `cmdline-tools` via IDE
+- [Flutter](https://docs.flutter.dev/get-started/install)  
+  *Recomenda-se usar o Visual Studio Code para facilitar o desenvolvimento*
 
-## Como rodar?
+### 3. Execute o app
 
-Após instalar os requisitos e aceitar os termos do Android, basta abrir a pasta do projeto e rodar o comando `flutter run`, que ele irá rodar o seu projeto no dispositivo desejado. (No presente momento, a implementação de login e registro não foi feita, portanto é possível utilizar o aplicativo sem uma conta).
+Conecte um dispositivo físico ou emulador e rode:
 
-## Informações adicionais
+```
+flutter run
+```
 
-Caso queira saber, o repositório do nosso teste de API é [mock-coffee](https://github.com/jian-19/koffi-unoesc). Uma API simples apenas para a POC.
+---
+
+## 📚 Informações importantes
+
+- O app ainda não possui funcionalidades de login ou registro, portanto pode ser usado sem conta.
+- Para os dados e backend mockado, utilize a API simples disponível no repositório [mock-coffee](https://github.com/jian-19/mock-coffe).
+
+---
+
+## 📁 Estrutura do projeto
+
+```
+koffi-unoesc/
+├── lib/
+│   ├── controllers/
+│   ├── models/
+│   ├── views/
+│   └── main.dart
+├── android/
+├── ios/
+├── test/
+├── pubspec.yaml
+└── README.md
+```
+
+---
+
+## 📝 Licença
+
+Este projeto foi desenvolvido para fins educacionais como parte do curso de **Análise e Desenvolvimento de Sistemas** da UNOESC.  
+Distribuído livremente para aprendizado e testes.
+
+---
