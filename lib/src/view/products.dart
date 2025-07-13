@@ -91,7 +91,6 @@ class ProductsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16), 
 
-          // LANCHES
           GestureDetector(
             onTap: () {
               
